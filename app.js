@@ -12,9 +12,10 @@ let routingControl = null;
 const map = L.map('map').setView([52.4862, -1.8904], 13);
 
 // Load the standard OpenStreetMap tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap contributors'
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    subdomains: 'abcd',
+    maxZoom: 20
 }).addTo(map);
 
 let currentMarker = null;
