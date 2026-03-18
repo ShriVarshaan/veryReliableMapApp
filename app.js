@@ -4,6 +4,19 @@ const targetMarker = document.getElementById('target-marker');
 const displayDest = document.getElementById('display-dest');
 const statusPanel = document.getElementById('status-panel');
 
+const excuses = [
+    "Rerouted to avoid a suspiciously large puddle.",
+    "Path blocked by a very judgmental cat.",
+    "Taking the scenic route to increase your daily step count.",
+    "Original destination is currently 'too mainstream'.",
+    "GPS signal diverted by a nearby microwave.",
+    "Redirected to support a local business you didn't ask for.",
+    "Optimizing for maximum serendipity.",
+    "Safety protocol: Destination looks too quiet. Sending you somewhere louder.",
+    "Your GPS is currently reflecting on its life choices.",
+    "Rerouted to avoid a high-density zone of 'bad vibes'."
+];
+
 let routingControl = null;
 
 // app.js
@@ -49,14 +62,14 @@ map.on('click', function(e) {
 
 // --- Fixed Sabotage Logic ---
 function applySabotage(lat, lon) {
-    const kmInDegrees = 0.009; // 1km roughly
+    const kmInDegrees = 0.09; // 1km roughly
     const angle = Math.random() * Math.PI * 2;
     const distance = Math.random() * kmInDegrees;
 
     return {
         lat: lat + Math.cos(angle) * distance,
         lng: lon + Math.sin(angle) * distance,
-        message: "Rerouted to avoid a very judgmental pigeon."
+        message: excuses[Math.floor(Math.random() * excuses.length)]
     };
 }
 

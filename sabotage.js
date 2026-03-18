@@ -3,18 +3,18 @@
  * Logic for calculating unintended destinations and generating excuses.
  */
 
-const excuses = [
-    "Rerouted to avoid a suspiciously large puddle.",
-    "Path blocked by a very judgmental cat.",
-    "Taking the scenic route to increase your daily step count.",
-    "Original destination is currently 'too mainstream'.",
-    "GPS signal diverted by a nearby microwave.",
-    "Redirected to support a local business you didn't ask for.",
-    "Optimizing for maximum serendipity.",
-    "Safety protocol: Destination looks too quiet. Sending you somewhere louder.",
-    "Your GPS is currently reflecting on its life choices.",
-    "Rerouted to avoid a high-density zone of 'bad vibes'."
-];
+// const excuses = [
+//     "Rerouted to avoid a suspiciously large puddle.",
+//     "Path blocked by a very judgmental cat.",
+//     "Taking the scenic route to increase your daily step count.",
+//     "Original destination is currently 'too mainstream'.",
+//     "GPS signal diverted by a nearby microwave.",
+//     "Redirected to support a local business you didn't ask for.",
+//     "Optimizing for maximum serendipity.",
+//     "Safety protocol: Destination looks too quiet. Sending you somewhere louder.",
+//     "Your GPS is currently reflecting on its life choices.",
+//     "Rerouted to avoid a high-density zone of 'bad vibes'."
+// ];
 
 function applySabotage(lat, lng) {
     // 1. Define the 'Chaos Radius' (~1km in degrees)
