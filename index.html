@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeryReliableMapApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app-container">
+        <aside class="controls">
+            <h1>🗺️ ReliableMaps</h1>
+            <p class="tagline">Precisely accurate-ish.</p>
+            
+            <div class="search-box">
+                <input type="text" id="destination" placeholder="Where do you want to go?">
+                <button id="search-btn">Navigate</button>
+            </div>
+
+            <div id="status-panel" class="hidden">
+                <div class="route-info">
+                    <span class="label">Destination:</span>
+                    <span id="display-dest">--</span>
+                </div>
+                <div class="accuracy-badge">99.9% Accurate*</div>
+            </div>
+        </aside>
+
+        <section id="map-viewport">
+            <div id="user-marker" class="marker"></div>
+            <div id="target-marker" class="marker target hidden"></div>
+            <div id="grid-overlay"></div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="sabotage.js"></script>
+</body>
+</html>
