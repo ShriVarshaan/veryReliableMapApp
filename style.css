@@ -99,3 +99,20 @@ body, html {
     width: 100vw;
     z-index: 1; /* Keep map below the UI container */
 }
+
+.leaflet-routing-container {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: #333 !important; /* Dark text */
+    font-family: Arial, sans-serif;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.leaflet-routing-alt {
+    color: #333 !important;
+}
+
+.leaflet-routing-icon {
+    filter: invert(0); /* Ensures icons stay dark */
+}
