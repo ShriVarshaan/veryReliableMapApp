@@ -4,19 +4,6 @@ const targetMarker = document.getElementById('target-marker');
 const displayDest = document.getElementById('display-dest');
 const statusPanel = document.getElementById('status-panel');
 
-const excuses = [
-    "Rerouted to avoid a suspiciously large puddle.",
-    "Path blocked by a very judgmental cat.",
-    "Taking the scenic route to increase your daily step count.",
-    "Original destination is currently 'too mainstream'.",
-    "GPS signal diverted by a nearby microwave.",
-    "Redirected to support a local business you didn't ask for.",
-    "Optimizing for maximum serendipity.",
-    "Safety protocol: Destination looks too quiet. Sending you somewhere louder.",
-    "Your GPS is currently reflecting on its life choices.",
-    "Rerouted to avoid a high-density zone of 'bad vibes'."
-];
-
 let routingControl = null;
 const excuses = [
     "Rerouted to avoid a suspiciously large puddle.",
