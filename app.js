@@ -4,6 +4,8 @@ const targetMarker = document.getElementById('target-marker');
 const displayDest = document.getElementById('display-dest');
 const statusPanel = document.getElementById('status-panel');
 
+let routingControl = null;
+
 // app.js
 
 // Initialize the map, centering on Birmingham
@@ -58,6 +60,8 @@ function applySabotage(lat, lon) {
 }
 
 // --- Fixed Handle Navigation ---
+
+
 async function handleNavigation() {
     const query = document.getElementById('destination').value;
     if (!query) return;
@@ -65,37 +69,50 @@ async function handleNavigation() {
     displayDest.innerText = query;
     statusPanel.classList.remove('hidden');
 
-    let finalData;
+    // 1. Get the User's Real Source Location
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const userLat = position.coords.latitude;
+        const userLon = position.coords.longitude;
 
-    try {
-        const realLocation = await searchAddress(query); 
-        finalData = applySabotage(realLocation.lat, realLocation.lon);
-    } catch (err) {
-        const fallback = map.getCenter();
-        finalData = applySabotage(fallback.lat, fallback.lng);
-    }
+        try {
+            // 2. Get the Intended Destination
+            const realLocation = await searchAddress(query); 
+            
+            // 3. Sabotage it
+            const finalData = applySabotage(realLocation.lat, realLocation.lon);
 
-    // Ensure currentMarker exists on the map
-    if (!currentMarker) {
-        currentMarker = L.marker([finalData.lat, finalData.lng]).addTo(map);
-    } else {
-        currentMarker.setLatLng([finalData.lat, finalData.lng]);
-    }
+            // 4. Clear old route if it exists
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
 
-    // Update Popup and Map
-    currentMarker.bindPopup(`<b>Arrived-ish!</b><br>${finalData.message}`).openPopup();
-    map.flyTo([finalData.lat, finalData.lng], 15);
+            // 5. Draw the "Reliable" Route
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(userLat, userLon),
+                    L.latLng(finalData.lat, finalData.lng)
+                ],
+                lineOptions: {
+                    styles: [{ color: '#ff4757', weight: 4 }] // Red line for the "sabotage"
+                },
+                addWaypoints: false,
+                draggableWaypoints: false,
+                createMarker: function(i, wp) {
+                    if (i === 1) { // Only create a marker for the destination
+                        return L.marker(wp.latLng).bindPopup(`<b>Arrived-ish!</b><br>${finalData.message}`).openPopup();
+                    }
+                    return L.marker(wp.latLng).bindPopup("Your Real Location");
+                }
+            }).addTo(map);
 
-    // Synchronize the CSS overlay (targetMarker) if you are using one
-    const pixelPoint = map.latLngToContainerPoint([finalData.lat, finalData.lng]);
-    targetMarker.classList.remove('hidden');
-    targetMarker.style.left = `${pixelPoint.x}px`;
-    targetMarker.style.top = `${pixelPoint.y}px`;
+            map.flyTo([finalData.lat, finalData.lng], 14);
+
+        } catch (err) {
+            console.error("Navigation failed", err);
+        }
+    }, (error) => {
+        alert("Please enable location services to use the source-to-destination routing.");
+    });
 }
 
-// --- Your Current Event Listener ---
 searchBtn.addEventListener('click', handleNavigation);
-
-document.getElementById('destination').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') handleNavigation();
-});
