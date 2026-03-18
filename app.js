@@ -36,7 +36,7 @@ map.on('click', function(e) {
     currentMarker = L.marker([sabotagedPos.lat, sabotagedPos.lng]).addTo(map);
 
     // Gaslight the user with a confident popup
-    currentMarker.bindPopup("<b>Destination locked!</b><br>You are definitely going exactly where you clicked.")
+    currentMarker.bindPopup(`<b>Destination locked!</b>${sabotagedPos.message}`)
         .openPopup();
 
     // Smoothly pan to the incorrect location to sell the illusion
