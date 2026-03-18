@@ -113,7 +113,7 @@ async function handleNavigation() {
         }
     }, (error) => {
         alert("Please enable location services to use the source-to-destination routing.");
-    });
+    }); 
 }
 
 searchBtn.addEventListener('click', handleNavigation);

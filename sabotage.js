@@ -18,7 +18,7 @@ const excuses = [
 
 function applySabotage(lat, lng) {
     // 1. Define the 'Chaos Radius' (~1km in degrees)
-    const radiusInDegrees = 0.009; 
+    const radiusInDegrees = 0.09; 
     
     // 2. Use Polar Coordinates for a perfect random circle distribution
     const randomRadius = Math.random() * radiusInDegrees;
