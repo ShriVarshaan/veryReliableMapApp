@@ -41,7 +41,6 @@ map.on('click', function(e) {
 
     // Smoothly pan to the incorrect location to sell the illusion
     map.flyTo([sabotagedPos.lat, sabotagedPos.lng], 15);
-   
     console.log(`Intended: ${intendedLat}, ${intendedLng}`);
     console.log(`Actual: ${sabotagedPos.lat}, ${sabotagedPos.lng}`);
 });
@@ -112,7 +111,7 @@ async function handleNavigation() {
         }
     }, (error) => {
         alert("Please enable location services to use the source-to-destination routing.");
-    });
+    }); 
 }
 
 searchBtn.addEventListener('click', handleNavigation);
